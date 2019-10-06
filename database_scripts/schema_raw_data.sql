@@ -1,3 +1,5 @@
+
+/*This is the table schema for the fannie and freddie raw data input*/
 CREATE TABLE loans_raw_freddie (
   credit_score text,
   first_payment_date integer,
