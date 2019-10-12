@@ -8,13 +8,13 @@ Step 2: run the populate files. The populate files will ingest the raw tables fr
 
 Step 3: qurey away! The analysis demo show you a couple of basic findings:
 
-![](docs/default_by_origination_year)
-* [Observe the 2008 Housing Crisis -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/default_by_orig_year/Sheet2)
-![](docs/default_rate_by_state)
-* [Cumulative Default Rate by States -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/default_by_state/Sheet1)
-![](docs/fico_scores_vs_default_status)
-* [Watch out for the low FICO -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/FicoScoresvsDefaultStatus/Sheet1)
-![](docs/first_home_buyers_default_status)
-* [First home buyers are your better bet -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/FirstHomevsDefaultStatus/Sheet2)
+![](docs/default_by_origination_year.png)
+* [Observe the 2008 Housing Crisis -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/default_by_orig_year/Sheet2)<br/>
+![](docs/default_rate_by_state.png)
+* [Cumulative Default Rate by States -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/default_by_state/Sheet1)<br/>
+![](docs/fico_scores_vs_default_status.png)
+* [Watch out for the low FICO -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/FicoScoresvsDefaultStatus/Sheet1)<br/>
+![](docs/first_home_buyers_default_status.png)
+* [First home buyers are your better bet -- click to see the interactive graph](https://public.tableau.com/profile/liwen6329#!/vizhome/FirstHomevsDefaultStatus/Sheet2)<br/>
 
 Step 4: If you are up for exploring the mortgage markets. This is only an iceberg of what this data can show. Use the extra schema, and extra analysis scripts to generate more insight. Or fire up your own sql queries!
