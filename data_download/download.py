@@ -50,16 +50,16 @@ def upload_fannie(file_name, zip_namelist):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='run this program to download all the single-family loan data by quarters or for a specific period')
-    parser.add_argument('-b', '--begin_year', help='the Beginning year')
-    parser.add_argument('-e', '--end_year', help='the end year')
+    parser.add_argument('-by', '--begin_year', help='the Beginning year')
+    parser.add_argument('-ey', '--end_year', help='the end year')
     parser.add_argument('-bq', '--begin_quarter', help='the begining quarter')
     parser.add_argument('-eq', '--end_quarter', help='the end quarter')
     args = parser.parse_args()
 
-    begin_year = int(beg_data[0:4])
-    begin_quarter = int(beg_data[-1])
-    end_year = int(end_data[0:4])
-    end_quarter = int(end_data[-1])
+    begin_year = args.begin_year
+    begin_quarter = args.begin_quarter
+    end_year = args.end_year
+    end_quarter = args.end_quarter
 
     if begin_year < end_year or (begin_year == end_year and begin_quarter <= end_quarter):
         for year in range(begin_year, end_year + 1):
