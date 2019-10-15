@@ -7,7 +7,7 @@ import os
 
 
 # import the acquisition file and performance file
-def import(Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path):
+def importdata (Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path):
     Acquisition_col = [
         "LOAN_ID", "ORIG_CHN", "Seller.Name", "ORIG_RT", "ORIG_AMT", "ORIG_TRM", "ORIG_DTE","FRST_DTE", "OLTV",
         "OCLTV", "NUM_BO", "DTI", "CSCORE_B", "FTHB_FLG", "PURPOSE", "PROP_TYP","NUM_UNIT", "OCC_STAT", "STATE",
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     Harp_Performance_path = args.h_performance
 
     #execute
-    import(Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path)
+    importdata(Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path)
     data_merge(Harp_acq, Harp_per, acq, per)
     classify_status()
     plot_status_count(final_datafinal_data)
