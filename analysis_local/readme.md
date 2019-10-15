@@ -7,7 +7,7 @@ In order to run the analysis, specify the path of the four input files: the acqu
 For example, below is how I would use the program to analyze the 2018 first quarter loan level data stored in the folder `2018Q1`; my harp input is stored in the folder `HARP_Files`.
 
 ```
-python processing_local.py -a './2018Q1/Acquisition_2018Q1.txt' -p './2018Q1/Acquisition_2018Q1.txt' -i ''./HARP_Files/Acquisition_HARP.txt' -u './HARP_Files/
+python processing_local.py -a './2018Q1/Acquisition_2018Q1.txt' -p './2018Q1/Acquisition_2018Q1.txt' -i './HARP_Files/Acquisition_HARP.txt' -u './HARP_Files/
 Performance_HARP.txt'
 ```
 
