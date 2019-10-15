@@ -1,38 +1,22 @@
-/*shows the tables that are available in your database*/ 
+/*shows the tables that are available in your database*/
 SELECT DISTINCT tablename
 FROM PG_TABLE_DEF
 WHERE schemaname = 'public';
 
-SELECT COUNT(*) FROM loans_raw_fannie;
-SELECT COUNT(*) FROM monthly_observations_raw_fannie;
 
 
-/* counts the loans originated each year*/ 
+/* counts the loans originated each year*/
 DROP TABLE IF EXISTS orig_by_year;
-
-CREATE TABLE orig_by_year 
+CREATE TABLE orig_by_year
 AS
 SELECT COUNT(*),
        date_part(to_date (origination_date,'MM/YYYY')) AS origination_date
 FROM loans_raw_fannie
 GROUP BY origination_date;
 
-DROP TABLE IF EXISTS
-SELECT origination_date
-FROM loans_raw_fannie
-limit 5;
-
-SELECT to_date(origination_date,'MM/YYYY') AS origination_date
-FROM loans_raw_fannie
-limit 5;
-
-SELECT date_part(year,to_date (origination_date,'MM/YYYY')) AS origination_date
-FROM loans_raw_fannie
-limit 5;
 
 DROP TABLE IF EXISTS zb_loans;
-
-CREATE TABLE zb_loans 
+CREATE TABLE zb_loans
 AS
 SELECT loan_sequence_number,
        reporting_period,
@@ -45,10 +29,9 @@ SELECT loan_sequence_number,
 FROM monthly_observations_raw_fannie
 WHERE zero_balance_code <> '';
 
-/*this should give you an overview of all the loans with zero balance status*/ 
+/*this should give you an overview of all the loans with zero balance status*/
 DROP TABLE IF EXISTS zb_loans_info;
-
-CREATE TABLE zb_loans_info 
+CREATE TABLE zb_loans_info
 AS
 SELECT *
 FROM (SELECT * FROM zb_loans)
@@ -56,41 +39,36 @@ FROM (SELECT * FROM zb_loans)
 
 DROP TABLE zb_loans;
 
-/* count the number of default over the years*/ 
+/* count the number of default over the years*/
 DROP TABLE IF EXISTS default_loans_info;
-
-CREATE TABLE default_loans_info 
+CREATE TABLE default_loans_info
 AS
 SELECT *
 FROM zb_loans_info
 WHERE zero_balance_code IN ('09','15','03');
 
 DROP TABLE IF EXISTS default_by_orgin_year;
-
-CREATE TABLE default_by_orgin_year 
+CREATE TABLE default_by_orgin_year
 AS
 SELECT COUNT(*) AS default_count,
        to_date(origination_date,'MM/YYYY') AS origination_date
 FROM default_loans_info
 GROUP BY origination_year;
 
-/*now put together the origination year and the default of that origination year*/ 
+/*now put together the origination year and the default of that origination year*/
 DROP TABLE IF EXISTS default_rate_by_origin_year;
-
-CREATE TABLE default_rate_by_origin_year 
+CREATE TABLE default_rate_by_origin_year
 AS
 SELECT *
 FROM default_by_orgin_year
   JOIN orig_by_year USING (origination_year);
 
 DROP TABLE default_by_orgin_year;
-
 DROP TABLE orig_by_year;
 
-/* see the default rate by state */ 
+/* see the default rate by state */
 DROP TABLE IF EXISTS count_by_state;
-
-CREATE TABLE count_by_state 
+CREATE TABLE count_by_state
 AS
 SELECT COUNT(*) AS loan_count,
        property_state
@@ -98,8 +76,7 @@ FROM loans_raw_fannie
 GROUP BY property_state;
 
 DROP TABLE IF EXISTS default_by_state;
-
-CREATE TABLE default_by_state 
+CREATE TABLE default_by_state
 AS
 SELECT COUNT(*) AS default_count,
        property_state
@@ -107,19 +84,17 @@ FROM default_loans_info
 GROUP BY property_state;
 
 DROP TABLE IF EXISTS default_rate_by_state;
-
-CREATE TABLE default_rate_by_state 
+CREATE TABLE default_rate_by_state
 AS
 SELECT *
 FROM count_by_state
   JOIN default_by_state USING (property_state);
 
-DROP TABLE count_by_state,default_by_state;
+DROP TABLE count_by_state, default_by_state;
 
-/* comparision of default and healthy loan in terms of fico and DTI*/ 
+/* comparision of default and healthy loan in terms of fico and DTI*/
 DROP TABLE IF EXISTS credit_performance;
-
-CREATE TABLE credit_performance 
+CREATE TABLE credit_performance
 AS
 SELECT loan_sequence_number,
        dti,
@@ -141,8 +116,7 @@ FROM (SELECT loan_sequence_number,
              FROM zb_loans_info) USING (loan_sequence_number);
 
 DROP TABLE IF EXISTS credit_performance_cat;
-
-CREATE TABLE credit_performance_cat 
+CREATE TABLE credit_performance_cat
 AS
 SELECT *,
        CASE
@@ -159,12 +133,10 @@ FROM credit_performance;
 
 DROP TABLE credit_performance;
 
-/* Sample a subset so it is plottable in tableau */ 
+/* Sample a subset so it is plottable in tableau */
 DROP TABLE IF EXISTS credit_performance_small;
-
 CREATE TABLE credit_performance_small 
 AS
 SELECT *
 FROM credit_performance_cat
 ORDER BY random() limit 10000;
-
