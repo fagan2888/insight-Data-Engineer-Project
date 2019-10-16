@@ -7,7 +7,7 @@ import os
 
 
 # import the acquisition file and performance file
-def importdata (Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path):
+def importdata(Acquisition_data_path, Performance_data_path, Harp_Acquisition_path, Harp_Performance_path):
     Acquisition_col = [
         "LOAN_ID", "ORIG_CHN", "Seller.Name", "ORIG_RT", "ORIG_AMT", "ORIG_TRM", "ORIG_DTE","FRST_DTE", "OLTV",
         "OCLTV", "NUM_BO", "DTI", "CSCORE_B", "FTHB_FLG", "PURPOSE", "PROP_TYP","NUM_UNIT", "OCC_STAT", "STATE",
